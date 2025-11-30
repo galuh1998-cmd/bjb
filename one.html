@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bjb DigiCash - Tanya</title>
+  <style>
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fff;
+      color: #4a606b;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .container {
+      padding: 30px 24px 0 24px;
+      max-width: 420px;
+      margin: 0 auto;
+      flex-grow: 1;
+      box-sizing: border-box;
+    }
+
+    .question {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.4;
+      margin-bottom: 32px;
+      color: #4a606b;
+    }
+
+    button {
+      font-size: 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      width: 100%;
+      padding: 14px 0;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      border: none;
+    }
+
+    .btn-sudah {
+      background-color: #f5c440; /* kuning cerah */
+      color: #3b2707;
+      margin-bottom: 16px;
+      border: none;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .btn-sudah:hover {
+      background-color: #e0b233;
+    }
+
+    .btn-belum {
+      background-color: #fff;
+      color: #4a606b;
+      border: 2px solid #f5c440;
+      font-weight: 400;
+    }
+
+    .btn-belum:hover {
+      background-color: #fff9d6;
+    }
+
+    /* Bagian bawah logo dan layanan */
+    .bottom-section {
+      position: relative;
+      max-width: 420px;
+      margin: 0 auto 24px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 0 24px;
+      box-sizing: border-box;
+    }
+
+    /* Ikon Layanan kiri bawah */
+    .icon-layanan {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 12px;
+      color: #4a606b;
+      font-weight: 400;
+      user-select: none;
+      gap: 6px;
+      width: 56px;
+    }
+
+    .icon-layanan .icon-bg {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(180deg, #34b5f9 0%, #0f88d2 100%);
+      border-radius: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(10, 78, 136, 0.4);
+    }
+
+    .icon-grid {
+      width: 20px;
+      height: 20px;
+      display: grid;
+      grid-template-columns: repeat(2, 8px);
+      grid-template-rows: repeat(2, 8px);
+      gap: 4px;
+    }
+
+    .icon-grid div {
+      background: white;
+      border-radius: 2px;
+    }
+
+    /* Gambar ilustrasi wanita kanan bawah */
+    .illustration {
+      height: 220px;
+      max-height: 220px;
+      user-select: none;
+      object-fit: contain;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <p class="question">
+      Selamat datang,<br />
+      Apakah Anda sudah memiliki rekening bank bjb atau DigiCash?
+    </p>
+    <button class="btn-sudah">Sudah</button>
+    <button class="btn-belum">Belum</button>
+  </div>
+
+  <div class="bottom-section">
+    <div class="icon-layanan">
+      <div class="icon-bg">
+        <div class="icon-grid">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      Layanan
+    </div>
+
+    <img
+      src="https://i.ibb.co/4Wcb5yP/NgZXy3ph.png"
+      alt="Logo Orang Memakai Seragam Biru"
+      class="illustration"
+      draggable="false"
+    />
+  </div>
+
+</body>
+</html>
