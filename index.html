@@ -54,7 +54,7 @@
     margin-top: 20px;
   }
   .skip {
-    color: #1e4a79; /* biru tua */
+    color: #1e4a79;
     font-weight: 500;
     cursor: pointer;
     user-select: none;
@@ -71,7 +71,7 @@
     background: #bbb;
   }
   .dot.active {
-    background: #1e4a79; /* biru tua */
+    background: #1e4a79;
   }
   .arrow {
     color: #1e4a79;
@@ -98,9 +98,15 @@
       <div class="dot"></div>
       <div class="dot"></div>
     </div>
-    <div class="arrow">&#8594;</div>
+    <div class="arrow" id="nextBtn">&#8594;</div>
   </footer>
 </div>
+
+<script>
+  document.getElementById("nextBtn").addEventListener("click", function() {
+    window.location.href = "one.html";
+  });
+</script>
 
 </body>
 </html>
