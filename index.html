@@ -14,15 +14,14 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
   }
   .container {
     max-width: 360px;
     width: 100%;
-    padding: 20px 20px 0;
+    padding: 20px;
     margin: auto;
-    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,12 +46,12 @@
   }
   footer {
     width: 100%;
-    max-width: 360px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px 20px;
+    padding: 20px 0 0;
     box-sizing: border-box;
+    margin-top: 20px;
   }
   .skip {
     color: #1e4a79; /* biru tua */
@@ -92,17 +91,16 @@
   <h2>COB (Customer On Boarding)</h2>
   <p>Cukup menggunakan handphone, kamu sudah bisa buka rekening bank bjb dan Digicash secara online</p>
   <p>Nikmati segala kemudahan akses transaksi perbankan kamu dengan aplikasi DIGI.</p>
+  <footer>
+    <div class="skip">Skip</div>
+    <div class="pagination">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+    <div class="arrow">&#8594;</div>
+  </footer>
 </div>
-
-<footer>
-  <div class="skip">Skip</div>
-  <div class="pagination">
-    <div class="dot active"></div>
-    <div class="dot"></div>
-    <div class="dot"></div>
-  </div>
-  <div class="arrow">&#8594;</div>
-</footer>
 
 </body>
 </html>
