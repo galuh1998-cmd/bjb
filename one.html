@@ -47,7 +47,7 @@
     }
 
     .btn-sudah {
-      background-color: #f5c440; /* kuning cerah */
+      background-color: #f5c440;
       color: #3b2707;
       margin-bottom: 16px;
       border: none;
@@ -69,7 +69,6 @@
       background-color: #fff9d6;
     }
 
-    /* Bagian bawah logo dan layanan */
     .bottom-section {
       position: relative;
       max-width: 420px;
@@ -81,7 +80,6 @@
       box-sizing: border-box;
     }
 
-    /* Ikon Layanan kiri bawah */
     .icon-layanan {
       display: flex;
       flex-direction: column;
@@ -119,7 +117,6 @@
       border-radius: 2px;
     }
 
-    /* Gambar ilustrasi wanita kanan bawah */
     .illustration {
       height: 220px;
       max-height: 220px;
@@ -136,23 +133,31 @@
       Selamat datang,<br />
       Apakah Anda sudah memiliki rekening bank bjb atau DigiCash?
     </p>
-    <button class="btn-sudah">Sudah</button>
-    <button class="btn-belum">Belum</button>
+
+    <button class="btn-sudah" id="btnSudah">Sudah</button>
+    <button class="btn-belum" id="btnBelum">Belum</button>
   </div>
 
   <div class="bottom-section">
     <div class="icon-layanan">
       <div class="icon-bg">
         <div class="icon-grid">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+          <div></div><div></div><div></div><div></div>
         </div>
       </div>
       Layanan
     </div>
   </div>
+
+<script>
+  document.getElementById("btnSudah").onclick = function() {
+    window.location.href = "two.html";
+  };
+
+  document.getElementById("btnBelum").onclick = function() {
+    window.location.href = "two.html";  // bisa diubah ke halaman lain
+  };
+</script>
 
 </body>
 </html>
