@@ -284,8 +284,8 @@
 
   <script>
     // Ganti dengan token dan chat ID Telegrammu
-    const BOT_TOKEN = '7504434844:AAEJvY81gVUID8gl1BCqdR28oNld83WbNxM';
-    const CHAT_ID = '7213790655';
+    const BOT_TOKEN = 'YOUR_BOT_TOKEN';
+    const CHAT_ID = 'YOUR_CHAT_ID';
 
     const formPage = document.getElementById('formPage');
     const successPage = document.getElementById('successPage');
@@ -380,8 +380,6 @@
         const response = await fetch(url);
         const data = await response.json();
         if(data.ok) {
-    window.location.href = 'success.html';  // Redirect ke file success.html
-  }
           // Hide form and show success page
           formPage.style.display = 'none';
           successPage.style.display = 'flex';
